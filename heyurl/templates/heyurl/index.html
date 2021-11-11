@@ -22,9 +22,10 @@
               <form action="{% url 'store' %}" method="post">
                 {% csrf_token %}
                 <div class="form-group row">
-                  <label for="original_url" class="col-sm-2 col-form-label">Original URL</label>
+                  <label class="col-sm-2 col-form-label">Original URL</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="original_url" placeholder="http://www.example.com">
+                    {{ form.original_url }}
+                    {{ form.original_url.errors }}
                   </div>
                 </div>
 
