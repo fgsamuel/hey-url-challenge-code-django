@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.urls import include, path
 
+from heyurl.api.views import UrlListView
+
 urlpatterns = [
     path('', include('heyurl.routes.web')),
     path('u/<short_url>/', include('heyurl.routes.short_url')),
+    path('api/urls/', UrlListView.as_view(), name='api_urls'),
 ]
