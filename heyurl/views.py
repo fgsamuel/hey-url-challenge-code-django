@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.db.models import Count
+from django.db.models.functions import TruncDate
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
 from .forms import UrlForm
-from .models import Url
+from .models import Url, Click
 from .services import create_short_url
 
 
@@ -26,6 +28,30 @@ def store(request):
 
     return HttpResponse("Storing a new URL object into storage")
 
-def short_url(request, short_url):
-    # FIXME: Do the logging to the db of the click with the user agent and browser
+
+def short_url_view(request, short_url):
+    obj = get_object_or_404(Url, short_url=short_url)
+
+    Click.objects.create(
+        url=obj,
+        browser=request.user_agent.browser.family,
+        platform=request.user_agent.os.family
+    )
+
+    count = Click.objects.filter(url=obj).count()
+    obj.clicks = count
+    obj.save()
+
     return HttpResponse("You're looking at url %s" % short_url)
+
+
+def report_metrics(request, short_url):
+    obj = get_object_or_404(Url, short_url=short_url)
+
+    clicks = Click.objects.filter(url=obj)\
+        .annotate(day=TruncDate('created_at'))\
+        .values('day', 'browser', 'platform')\
+        .annotate(total=Count('*')).order_by('-day', 'browser')
+
+    context = dict(object=obj, clicks=clicks, object_list=clicks)
+    return render(request, 'heyurl/report.html', context)
