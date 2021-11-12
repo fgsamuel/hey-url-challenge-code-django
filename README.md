@@ -1,6 +1,10 @@
 # Resolution
 
-## How to run the project
+You can check the project running here: [https://heyurl.herokuapp.com/](https://heyurl.herokuapp.com/)
+
+You can access the API here: [https://heyurl.herokuapp.com/api/urls/](https://heyurl.herokuapp.com/api/urls/)
+
+## How to run the project in your workspace
 
 Download the code:
 
@@ -25,6 +29,10 @@ python manage.py runserver
 ```
 
 Now you can check the result in `http://localhost:8000/`
+
+If you want to use the API you can go to
+
+`http://localhost:8000/api/urls/`
 
 ## Discussions
 
