@@ -15,7 +15,7 @@ Before run the commands below, make sure you have an activated virtual env with 
 
 Install requirments
 ```shell
-pip install -r requirements
+pip install -r requirements.txt
 ```
 
 Migrate database
