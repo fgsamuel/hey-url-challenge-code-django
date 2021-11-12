@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.db.models import Count
 from django.db.models.functions import TruncDate
 from django.shortcuts import render, get_object_or_404, redirect
@@ -25,6 +26,7 @@ def store(request):
         obj = form.save(commit=False)
         obj.short_url = create_short_url()
         obj.save()
+        messages.add_message(request, messages.SUCCESS, 'Url has been saved!', extra_tags='alert alert-success')
 
     return redirect(reverse('index'))
 
