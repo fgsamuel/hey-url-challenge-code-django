@@ -1,3 +1,52 @@
+# Resolution
+
+## How to run the project
+
+Download the code:
+
+```shell
+git clone https://github.com/fgsamuel/hey-url-challenge-code-django.git
+```
+Before run the commands below, make sure you have an activated virtual env with python `3.9.6` or newer and be inside root folder
+
+Install requirments
+```shell
+pip install -r requirements
+```
+
+Migrate database
+```shell
+python manage.py migrate
+```
+
+Execute the project
+```shell
+python manage.py runserver
+```
+
+Now you can check the result in `http://localhost:8000/`
+
+## Discussions
+
+I have separated what I think is business logic in the `services.py` file because its can be reused and easily updated.
+
+I prefer use Django form rather than html form because its can be more organized, reusable and cleaner for the web designer of the project.
+
+I created the report data using only Django ORM and always do this when possible because you can change the database in future with no problem.
+Use raw sql only in realy, realy complex queries.
+
+I used bootstrap to improve the appearance of the report page because minimal visual is important.
+
+I used pytest to create unit tests because it's simple to use and read.
+
+I generally use tools that improve my productivity, as `django-extensions` and `jupyter`.
+
+I used `django rest framework` to create the api because it's one of the most known
+
+
+---------------------------------------------------
+
+
 # HeyURL! Code Challenge (Django)
 
 This repository has been created as a code challenge for candidates with
