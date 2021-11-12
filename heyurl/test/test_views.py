@@ -39,3 +39,9 @@ def test_post_create_metrics_field(client, db):
     client.get(url)
     obj.refresh_from_db()
     assert obj.clicks == 1
+
+
+def test_short_url_404(client, db):
+    url = reverse('short_url', kwargs={'short_url': '12345'})
+    resp = client.get(url)
+    assert resp.status_code == 404
