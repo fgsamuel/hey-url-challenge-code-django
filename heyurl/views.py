@@ -1,7 +1,8 @@
 from django.db.models import Count
 from django.db.models.functions import TruncDate
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.urls import reverse
 
 from .forms import UrlForm
 from .models import Url, Click
@@ -42,7 +43,7 @@ def short_url_view(request, short_url):
     obj.clicks = count
     obj.save()
 
-    return HttpResponse("You're looking at url %s" % short_url)
+    return redirect(obj.original_url)
 
 
 def report_metrics(request, short_url):

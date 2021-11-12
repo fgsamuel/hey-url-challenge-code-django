@@ -45,3 +45,11 @@ def test_short_url_404(client, db):
     url = reverse('short_url', kwargs={'short_url': '12345'})
     resp = client.get(url)
     assert resp.status_code == 404
+
+
+def test_redirect(client, db):
+    obj = Url.objects.create(original_url='http://google.com', short_url='12345')
+    url = reverse('short_url', kwargs={'short_url': '12345'})
+    resp = client.get(url)
+    assert resp.url == 'http://google.com'
+
