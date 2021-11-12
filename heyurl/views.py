@@ -1,7 +1,6 @@
 from django.db.models import Count
 from django.db.models.functions import TruncDate
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
 from django.urls import reverse
 
 from .forms import UrlForm
@@ -27,7 +26,7 @@ def store(request):
         obj.short_url = create_short_url()
         obj.save()
 
-    return HttpResponse("Storing a new URL object into storage")
+    return redirect(reverse('index'))
 
 
 def short_url_view(request, short_url):

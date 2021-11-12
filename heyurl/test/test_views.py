@@ -53,3 +53,10 @@ def test_redirect(client, db):
     resp = client.get(url)
     assert resp.url == 'http://google.com'
 
+
+def test_redirect_after_create(client, db):
+    Url.objects.create(original_url='http://google.com', short_url='12345')
+    url = reverse('store')
+    data = dict(original_url='http://google.com')
+    resp = client.post(url, data=data)
+    assert 'heyurl/index.html' in (t.name for t in resp.templates)
